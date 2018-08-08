@@ -63,10 +63,14 @@
       <AssemblyName>XSharp.Core.dll</AssemblyName>
       <SpecificVersion>False</SpecificVersion>
       <Private>True</Private>
-      <HintPath>..\..\..\Program Files (x86)\XSharp\Assemblies\XSharp.Core.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ArrayExtensions.prg" />
+    <Compile Include="BindableBase.prg" />
+    <Compile Include="ExpandoBase.prg" />
+    <Compile Include="Functions.prg" />
+    <Compile Include="ObjectExtensions.prg" />
     <Compile Include="..\Common\commonAssemblyInfo.prg">
       <Link>commonAssemblyInfo.prg</Link>
     </Compile>
