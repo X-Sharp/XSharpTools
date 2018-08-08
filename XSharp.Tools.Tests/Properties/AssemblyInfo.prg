@@ -5,5 +5,5 @@ USING System.Runtime.CompilerServices
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 //
-[ASSEMBLY: AssemblyTitle("XSharp.Tools.Windows.Forms")]
-[ASSEMBLY: AssemblyDescription("Public XSharp.Tools.Windows.Forms library")]
+[ASSEMBLY: AssemblyTitle("XSharp.Tools.Tests")]
+[ASSEMBLY: AssemblyDescription("XSharp.Tools.Tests")]
