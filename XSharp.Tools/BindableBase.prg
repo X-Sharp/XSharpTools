@@ -1,78 +1,78 @@
 ﻿
 
-using System.ComponentModel    
-using System.Runtime.CompilerServices  
-using System.Collections.Generic   
-using System.Diagnostics   
+USING System.ComponentModel    
+USING System.Runtime.CompilerServices  
+USING System.Collections.Generic   
+USING System.Diagnostics   
 
-begin namespace XSharp.Tools
+BEGIN NAMESPACE XSharp.Tools
 
-public abstract class BindableBase implements INotifyPropertyChanged              
-    /// <summary>
-    /// Baseclass for implementing the INotifyPropertyChanged interface. Here'a sample for using it:
-    ///    public string FirstName
-    ///    {
-    ///        get { return Get<string>(); }
-    ///        set { Set<string>(value); }
-    ///    }
-    /// </summary>
-   	protect _properties := Dictionary<string, object>{} as Dictionary<string, object> 
-    public event PropertyChanged as PropertyChangedEventHandler
+/// <summary>
+/// Baseclass for implementing the INotifyPropertyChanged interface. Here'a sample for using it:
+///    public string FirstName
+///    {
+///        get { return Get<string>(); }
+///        set { Set<string>(value); }
+///    }
+/// </summary>
+PUBLIC ABSTRACT CLASS BindableBase IMPLEMENTS INotifyPropertyChanged              
+   	PROTECT _properties := Dictionary<STRING, OBJECT>{} AS Dictionary<STRING, OBJECT> 
+    PUBLIC EVENT PropertyChanged AS PropertyChangedEventHandler
 
-protected method _Get<T>( [CallerMemberName] name := null as string ) as T
-    /// <summary>
-    /// Gets the value of a property
-    /// </summary>
-    /// <typeparam name="T"></typeparam>
-    /// <param name="name">name of the parameter</param>
-    /// <returns></returns>
-  	local value := null as object
+/// <summary>
+/// Gets the value of a property
+/// </summary>
+/// <typeparam name="T"></typeparam>
+/// <param name="name">name of the parameter</param>
+/// <returns></returns>
+PROTECTED METHOD _Get<T>( [CallerMemberName] name := null AS STRING ) AS T
+  	LOCAL VALUE := null AS OBJECT
 
     Debug.Assert( name != null, "name != null" )
-    if _properties.TryGetValue( name, out value )
-     	if value == null
-       		return Default(T)
-       	else
-       		return (T) value
-       	endif
+    IF _properties.TryGetValue( name, OUT VALUE )
+     	IF VALUE == null
+       		RETURN DEFAULT(T)
+       	ELSE
+       		RETURN (T) VALUE
+       	ENDIF
         // return value == null ? Default(T) : (T)value
-    endif
-    return Default(T)
+    ENDIF
+    RETURN DEFAULT(T)
 
-protected method _Set<T>( value as T, [CallerMemberName] name := null as string ) as void
-    /// <summary>
-    /// Sets the value of a property
-    /// </summary>
-    /// <typeparam name="T"></typeparam>
-    /// <param name="value">value of the parameter</param>
-    /// <param name="name">name of the parameter</param>
-    /// <remarks>Use this overload when implicitly naming the property</remarks>
+/// <summary>
+/// Sets the value of a property
+/// </summary>
+/// <typeparam name="T"></typeparam>
+/// <param name="value">value of the parameter</param>
+/// <param name="name">name of the parameter</param>
+/// <remarks>Use this overload when implicitly naming the property</remarks>
+PROTECTED METHOD _Set<T>( VALUE AS T, [CallerMemberName] name := null AS STRING ) AS VOID
 
     // Debug.Print( "passed Name is " + name + ", passed value is " + value.ToString() )
 
     Debug.Assert(name != null, "name != null")
-    if ( Equals( value, _Get<T>(name) ) )
-        return    
-    endif
-    _properties[name] := value
+    IF ( EQUALS( VALUE, _Get<T>(name) ) )
+        RETURN    
+    ENDIF
+    _properties[name] := VALUE
     OnPropertyChanged( name )
         
-    return
+    RETURN
 
-protected virtual method OnPropertyChanged([CallerMemberName] propertyName := null as string ) as void
-    /// <summary>
-    /// Notifies about a changed property value
-    /// </summary>
-    /// <param name="propertyName">name of the property</param>
- 	local handler as PropertyChangedEventHandler
+/// <summary>
+/// Notifies about a changed property value
+/// </summary>
+/// <param name="propertyName">name of the property</param>
+PROTECTED VIRTUAL METHOD OnPropertyChanged([CallerMemberName] propertyName := null AS STRING ) AS VOID
+ 	LOCAL handler AS PropertyChangedEventHandler
     	
-    handler := self:PropertyChanged
-    if handler != null
-        handler( self, PropertyChangedEventArgs{ propertyName } )
-    endif
+    handler := SELF:PropertyChanged
+    IF handler != null
+        handler( SELF, PropertyChangedEventArgs{ propertyName } )
+    ENDIF
         
-    return
+    RETURN
             
-end class
+END CLASS
 	
-end namespace
+END NAMESPACE

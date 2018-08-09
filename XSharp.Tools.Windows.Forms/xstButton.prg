@@ -1,38 +1,38 @@
 ﻿
-using System.Windows.Forms 
-using System.Diagnostics  
-using XSharp.Tools.Core  
+USING System.Windows.Forms 
+USING System.Diagnostics  
+USING XSharp.Tools.Core  
 
-begin namespace XSharp.Tools.Windows.Forms
+BEGIN NAMESPACE XSharp.Tools.Windows.Forms
 
-class xstButton inherit Button
+CLASS xstButton INHERIT Button
 	
-constructor()      
-		super()
-	return
+CONSTRUCTOR()      
+		SUPER()
+	RETURN
 
-protect method OnClick( e as EventArgs ) as void
+PROTECT METHOD OnClick( e AS EventArgs ) AS VOID
 	
-	super:OnClick( e )
-	if self:Parent:IsMethod( self:Name )
-		self:Parent:Send( self:Name, null_object )
-	endif
+	SUPER:OnClick( e )
+	IF SELF:Parent:IsMethod( SELF:Name )
+		SELF:Parent:Send( SELF:Name, null_object )
+	ENDIF
 	
-	return
+	RETURN
 	
-method Enable() as void pascal
+METHOD Enable() AS VOID PASCAL
 	
-	self:Enabled		:= true
+	SELF:Enabled		:= true
 	
-	return	
+	RETURN	
 	
-method Disable() as void pascal
+METHOD Disable() AS VOID PASCAL
 	
-	self:Enabled		:= false
+	SELF:Enabled		:= false
 	
-	return	
+	RETURN	
 
 	
-end class
+END CLASS
 
-end namespace 
+END NAMESPACE 
