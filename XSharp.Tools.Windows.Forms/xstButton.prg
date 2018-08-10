@@ -1,7 +1,7 @@
 ﻿
 USING System.Windows.Forms 
 USING System.Diagnostics  
-USING XSharp.Tools.Core  
+USING XSharp.Tools
 
 BEGIN NAMESPACE XSharp.Tools.Windows.Forms
 
