@@ -73,8 +73,6 @@ STATIC METHOD Send( SELF oObject AS OBJECT, cMethod AS STRING, aParameters AS OB
 	ENDIF
 	
 	// end try         
-	oType				:= null_object
-	oInfo				:= null_object
 	
 	RETURN oReturn              
 	
@@ -111,7 +109,6 @@ STATIC METHOD PropertyNames( SELF oObject AS OBJECT ) AS STRING[]
 	FOR nI := 1 UPTO nLen
 		aReturn[nI]		:= oProperties[nI]:Name
 	NEXT
-	oProperties		:= null_object
 		
 	RETURN aReturn	
 	
@@ -128,11 +125,10 @@ STATIC METHOD IsProperty( SELF oObject AS OBJECT, cPropertyName AS STRING ) AS L
 	LOCAL nI			AS INT       
 	
 	aProperties		:= PropertyNames( oObject )
-	cPropertyName	:= cPropertyName:ToLower()
 	nLen			:= aProperties:Length
 	lReturn			:= false
 	FOR nI := 1 UPTO nLen
-		IF aProperties[nI]:ToLower() == cPropertyName
+        IF String.Compare( aProperties[nI], cPropertyName, StringComparison.OrdinalIgnoreCase ) == 0
 			lReturn			:= true
 			EXIT
 		ENDIF
@@ -147,11 +143,10 @@ STATIC METHOD FixPropertyName( SELF oObject AS OBJECT, cPropertyName AS STRING )
 	LOCAL nI			AS INT       
 	
 	aProperties		:= PropertyNames( oObject )
-	cPropertyName	:= cPropertyName:ToLower()
 	nLen			:= aProperties:Length
 	cReturn			:= cPropertyName
 	FOR nI := 1 UPTO nLen
-		IF aProperties[nI]:ToLower() == cPropertyName
+        IF String.Compare( aProperties[nI], cPropertyName, StringComparison.OrdinalIgnoreCase ) == 0
 			cReturn			:= aProperties[nI]
 			EXIT
 		ENDIF
