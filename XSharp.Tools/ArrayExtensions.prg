@@ -1,30 +1,29 @@
 ﻿
-begin namespace XSharp.Tools
+BEGIN NAMESPACE XSharp.Tools
 
-static class ArrayExtensions
 /// <summary> 
 /// static container class for extension methods for the array class
 /// </summary>
+STATIC CLASS ArrayExtensions
 
-static method FirstIndex( self aArray as System.Array ) as int
 /// <summary> 
 /// returns the index of the first array member, depending on the compiler switch
 /// </summary>
+STATIC METHOD FirstIndex( SELF aArray AS System.Array ) AS INT
 
-	return __ARRAYBASE__
+	RETURN __ARRAYBASE__
 
-
-static method LastIndex( self aArray as System.Array ) as int
 /// <summary> 
 /// returns the index of the last array member, depending on the compiler switch
 /// </summary>
-	local nLength			as int
+STATIC METHOD LastIndex( SELF aArray AS System.Array ) AS INT
+	LOCAL nLength			AS INT
 		
 	nLength			:= aArray:Length - 1 + __ARRAYBASE__
 		
-	return nLength
+	RETURN nLength
 
-end class
+END CLASS
 
-end namespace
+END NAMESPACE
 

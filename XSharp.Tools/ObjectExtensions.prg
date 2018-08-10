@@ -2,59 +2,56 @@
 // ObjectExtensions.prg , Created : 30.07.2018   06:27
 // User : Wolfgang
 
-using System                        
-using System.Text
-using System.Runtime.InteropServices
-using System.Reflection 
-using System.Diagnostics
-using System.Collections.Generic
+USING System                        
+USING System.Text
+USING System.Runtime.InteropServices
+USING System.Reflection 
+USING System.Diagnostics
+USING System.Collections.Generic
 
-begin namespace XSharp.Tools
+BEGIN NAMESPACE XSharp.Tools
 
-class ObjectExtensions
 /// <summary> 
 /// static class to extend objects by some extension methods
 /// </summary>
+CLASS ObjectExtensions
 
 #region constructors
-static constructor()  
 /// <summary> 
 /// constructor
 /// </summary>
-/// <param name="oAssembly">Assembly from which read the classes</param>
-/// <returns>aClassNames</returns>
-	super()
+STATIC CONSTRUCTOR()  
+	SUPER()
 
-	return
+	RETURN
 #endregion
-#region public properties
+#region PUBLIC properties
 #endregion
-#region public methods
+#region PUBLIC methods
 
-static method IsMethod( self oObject as object, cMethod as string ) as logic
 /// <summary> 
 /// checks if the given object has a method with the given name
 /// </summary>
 /// <param name="oObject">object which is checked</param>
 /// <param name="cMethod">method name</param>
 /// <returns>logic value</returns>
-	local oType as System.Type
-	local lReturn as logic
+STATIC METHOD IsMethod( SELF oObject AS OBJECT, cMethod AS STRING ) AS LOGIC
+	LOCAL oType AS System.Type
+	LOCAL lReturn AS LOGIC
 	
-	if oObject == null_object
+	IF oObject == null_object
 		lReturn		:= false
-	else
+	ELSE
 		oType 		:= oObject:GetType()
-		if oType:GetMethod( cMethod ) == null_object
+		IF oType:GetMethod( cMethod ) == null_object
 			lReturn		:= false
-		else
+		ELSE
 			lReturn		:= true
-		endif
-	endif
+		ENDIF
+	ENDIF
 	
-	return lReturn
+	RETURN lReturn
 
-static method Send( self oObject as object, cMethod as string, aParameters as object[] ) as object 
 /// <summary> 
 /// send a method to an object and pass parameters
 /// </summary>
@@ -62,149 +59,144 @@ static method Send( self oObject as object, cMethod as string, aParameters as ob
 /// <param name="cMethod">method name</param>
 /// <param name="aParameters">object array of the parameters to pass</param>
 /// <returns>object, return value of the method</returns>
-	local oType as System.Type
-	local oReturn as object
-	local oInfo as MethodInfo
+STATIC METHOD Send( SELF oObject AS OBJECT, cMethod AS STRING, aParameters AS OBJECT[] ) AS OBJECT 
+	LOCAL oType AS System.Type
+	LOCAL oReturn AS OBJECT
+	LOCAL oInfo AS MethodInfo
 	
 	oType 				:= oObject:GetType()
 	oReturn				:= null_object
 	// try
 	oInfo				:= oType:GetMethod( cMethod )
-	if oInfo != null_object
+	IF oInfo != null_object
 		oReturn				:= oInfo:Invoke( oObject, aParameters )
-	endif
+	ENDIF
 	
 	// end try         
-	oType				:= null_object
-	oInfo				:= null_object
 	
-	return oReturn              
+	RETURN oReturn              
 	
-static method ClassName( self oObject as object ) as string 
 /// <summary> 
 /// returns the class name of the passed object
 /// </summary>
 /// <param name="oObject">object which is checked</param>
 /// <returns>name of the class, string value</returns>
-	local cReturn		as string   
+STATIC METHOD ClassName( SELF oObject AS OBJECT ) AS STRING 
+	LOCAL cReturn		AS STRING   
 	
-	if oObject == null
+	IF oObject == null
 		cReturn				:= "Null"
-	else
+	ELSE
 		cReturn				:= oObject:GetType():Name
-	endif
+	ENDIF
 	
-	return cReturn	    
+	RETURN cReturn	    
 	
-static method PropertyNames( self oObject as object ) as string[]
 /// <summary> 
 /// returns an array of all existent property names of the passed object
 /// </summary>
 /// <param name="oObject">object which is checked</param>
 /// <returns>existing properties, array of string</returns>
-	local aReturn		as string[]
-	local nLen			as int
-	local nI			as int       
-	local oProperties	as System.Reflection.PropertyInfo[]
+STATIC METHOD PropertyNames( SELF oObject AS OBJECT ) AS STRING[]
+	LOCAL aReturn		AS STRING[]
+	LOCAL nLen			AS INT
+	LOCAL nI			AS INT       
+	LOCAL oProperties	AS System.Reflection.PropertyInfo[]
                           
 	oProperties		:= oObject:GetType():GetProperties()	
 	nLen			:= oProperties:Length
-	aReturn			:= string[]{nLen}
-	for nI := 1 upto nLen
+	aReturn			:= STRING[]{nLen}
+	FOR nI := 1 UPTO nLen
 		aReturn[nI]		:= oProperties[nI]:Name
-	next
-	oProperties		:= null_object
+	NEXT
 		
-	return aReturn	
+	RETURN aReturn	
 	
-static method IsProperty( self oObject as object, cPropertyName as string ) as logic pascal
 /// <summary> 
 /// checks if the passed object has a property with the passed name, case insensitive
 /// </summary>
 /// <param name="oObject">object which is checked</param>
 /// <param name="cPropertyName">property to check</param>
 /// <returns>logic value</returns>
-	local aProperties	as string[]
-	local lReturn		as logic
-	local nLen			as int
-	local nI			as int       
+STATIC METHOD IsProperty( SELF oObject AS OBJECT, cPropertyName AS STRING ) AS LOGIC PASCAL
+	LOCAL aProperties	AS STRING[]
+	LOCAL lReturn		AS LOGIC
+	LOCAL nLen			AS INT
+	LOCAL nI			AS INT       
 	
 	aProperties		:= PropertyNames( oObject )
-	cPropertyName	:= cPropertyName:ToLower()
 	nLen			:= aProperties:Length
 	lReturn			:= false
-	for nI := 1 upto nLen
-		if aProperties[nI]:ToLower() == cPropertyName
+	FOR nI := 1 UPTO nLen
+        IF String.Compare( aProperties[nI], cPropertyName, StringComparison.OrdinalIgnoreCase ) == 0
 			lReturn			:= true
-			exit
-		endif
-	next
+			EXIT
+		ENDIF
+	NEXT
 	
-	return lReturn
+	RETURN lReturn
 	
-static method FixPropertyName( self oObject as object, cPropertyName as string ) as string pascal
-	local aProperties	as string[]
-	local cReturn		as string
-	local nLen			as int
-	local nI			as int       
+STATIC METHOD FixPropertyName( SELF oObject AS OBJECT, cPropertyName AS STRING ) AS STRING PASCAL
+	LOCAL aProperties	AS STRING[]
+	LOCAL cReturn		AS STRING
+	LOCAL nLen			AS INT
+	LOCAL nI			AS INT       
 	
 	aProperties		:= PropertyNames( oObject )
-	cPropertyName	:= cPropertyName:ToLower()
 	nLen			:= aProperties:Length
 	cReturn			:= cPropertyName
-	for nI := 1 upto nLen
-		if aProperties[nI]:ToLower() == cPropertyName
+	FOR nI := 1 UPTO nLen
+        IF String.Compare( aProperties[nI], cPropertyName, StringComparison.OrdinalIgnoreCase ) == 0
 			cReturn			:= aProperties[nI]
-			exit
-		endif
-	next
+			EXIT
+		ENDIF
+	NEXT
 	
-	return cReturn
+	RETURN cReturn
 
-static method GetPropertyValue( self oObject as object, cPropertyName as string ) as object pascal
+STATIC METHOD GetPropertyValue( SELF oObject AS OBJECT, cPropertyName AS STRING ) AS OBJECT PASCAL
 //private object getProperty(object containingObject, string propertyName)
 //{
 //    return containingObject.GetType().InvokeMember(propertyName, BindingFlags.GetProperty, null, containingObject, null);
 //}        
 // Achtung: PropertyName muß korrekt geschrieben sein!!!!
-	local oReturn		as object	
-	local oInfo			as System.Reflection.PropertyInfo
+	LOCAL oReturn		AS OBJECT	
+	LOCAL oInfo			AS System.Reflection.PropertyInfo
 	
 	oInfo			:= oObject:GetType():GetProperty( cPropertyName ) //, System.Reflection.BindingFlags.GetProperty )
-	if oInfo != null_object                                  
+	IF oInfo != null_object                                  
 		oReturn			:= oInfo:GetValue( oObject, null_object ) 
-	else
+	ELSE
 		oReturn			:= null_object
-	endif
+	ENDIF
 
 //	oReturn			:= oObject:GetType():InvokeMember( cPropertyName, System.Reflection.BindingFlags.GetProperty, null, oObject, null )
 	
-	return oReturn
+	RETURN oReturn
 
-static method SetPropertyValue( self oObject as object, cPropertyName as string, oValue as object ) as void pascal 
+STATIC METHOD SetPropertyValue( SELF oObject AS OBJECT, cPropertyName AS STRING, oValue AS OBJECT ) AS VOID PASCAL 
 //private void setProperty(object containingObject, string propertyName, object newValue)
 //{
 //    containingObject.GetType().InvokeMember(propertyName, BindingFlags.SetProperty, null, containingObject, new object[] { newValue });
 //}
 // Achtung: PropertyName muß korrekt geschrieben sein!!!!   
-	local oInfo			as System.Reflection.PropertyInfo
+	LOCAL oInfo			AS System.Reflection.PropertyInfo
 	
 	oInfo			:= oObject:GetType():GetProperty( cPropertyName ) //, System.Reflection.BindingFlags.SetProperty )
-	if oInfo != null_object
+	IF oInfo != null_object
 		// debOut( "set property " + cPropertyName + " to " + oValue:ToString() )
 		oInfo:SetValue( oObject, oValue, null_object )                        
 	//else
 		// debOut( "set property " + cPropertyName + " not ok, Property not found" )
-	endif
+	ENDIF
 //	oObject:GetType():InvokeMember( cPropertyName, System.Reflection.BindingFlags.SetProperty, null, oObject, ( Object[] ) oValue )
 	
-	return
+	RETURN
 
-	
 
 #endregion
-#region internal methods
+#region INTERNAL methods
 #endregion
-end class
+END CLASS
 
-end namespace
+END NAMESPACE

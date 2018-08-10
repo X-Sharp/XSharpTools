@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+# Visual Studio 15
+VisualStudioVersion = 15.0.27703.2047
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{AA6C8D78-22FF-423A-9C7C-5F2393824E04}") = "XSharp.Tools", "XSharp.Tools\XSharp.Tools.xsproj", "{13BF6F66-7C17-4DA0-80EC-ED69FAD41D24}"
 EndProject
@@ -68,5 +68,8 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {55B17E08-F2FC-4FA6-8057-0DC8AF6E66A0}
 	EndGlobalSection
 EndGlobal
