@@ -38,7 +38,7 @@
     <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
     <DocumentationFile>XSharp.Tools.Windows.Forms.Xml</DocumentationFile>
     <UseSharedCompilation>true</UseSharedCompilation>
-    <DisabledWarnings />
+    <DisabledWarnings>1591</DisabledWarnings>
     <SignAssembly>false</SignAssembly>
     <DelaySign>false</DelaySign>
     <CommandLineOption />

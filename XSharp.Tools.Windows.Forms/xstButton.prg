@@ -14,7 +14,7 @@ CONSTRUCTOR()
 PROTECT METHOD OnClick( e AS EventArgs ) AS VOID
 	
 	SUPER:OnClick( e )
-	IF SELF:Parent:IsMethod( SELF:Name )
+	IF SELF:Parent:IsMethod( SELF:Name ) 
 		SELF:Parent:Send( SELF:Name, null_object )
 	ENDIF
 	
