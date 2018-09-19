@@ -61,18 +61,37 @@
   <Import Project="$(MSBuildExtensionsPath)\XSharp\XSharp.targets" />
   <ItemGroup>
     <Reference Include="mscorlib" />
+    <Reference Include="PresentationCore, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35">
+      <Name>PresentationCore</Name>
+      <AssemblyName>PresentationCore.dll</AssemblyName>
+      <SpecificVersion>False</SpecificVersion>
+    </Reference>
+    <Reference Include="PresentationFramework, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35">
+      <Name>PresentationFramework</Name>
+      <AssemblyName>PresentationFramework.dll</AssemblyName>
+      <SpecificVersion>False</SpecificVersion>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data" />
     <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Windows, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+      <Name>System.Windows</Name>
+      <AssemblyName>System.Windows.dll</AssemblyName>
+      <SpecificVersion>False</SpecificVersion>
+    </Reference>
     <Reference Include="System.Xml" />
     <Reference Include="System.Xml.Linq" />
+    <Reference Include="WindowsBase, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35">
+      <Name>WindowsBase</Name>
+      <AssemblyName>WindowsBase.dll</AssemblyName>
+      <SpecificVersion>False</SpecificVersion>
+    </Reference>
     <Reference Include="XSharp.Core, Version=2.0.0.3, Culture=neutral, PublicKeyToken=ed555a0467764586">
       <Name>XSharp.Core</Name>
       <AssemblyName>XSharp.Core.dll</AssemblyName>
       <SpecificVersion>False</SpecificVersion>
       <Private>True</Private>
-      <HintPath>..\..\..\Program Files (x86)\XSharp\Assemblies\XSharp.Core.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -82,14 +101,21 @@
     <Compile Include="..\Common\constants.prg">
       <Link>constants.prg</Link>
     </Compile>
+    <Compile Include="Controls\xstControlSettings.prg" />
+    <Compile Include="Framework\xstApplication.prg" />
+    <Compile Include="Framework\xstMessageHub.prg" />
+    <Compile Include="Interfaces\IXstMessage.prg" />
+    <Compile Include="Interfaces\IXstMessengerClient.prg" />
     <Compile Include="Properties\AssemblyInfo.prg">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Class1.prg">
-      <SubType>Code</SubType>
-    </Compile>
+    <Compile Include="Windows\xstWindow.prg" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Controls" />
+    <Folder Include="Framework" />
+    <Folder Include="Interfaces" />
+    <Folder Include="Windows" />
     <Folder Include="Properties\" />
   </ItemGroup>
   <!-- This next bit is required unless the macro used to Import your targets is defined in an MSBuild toolset. -->
