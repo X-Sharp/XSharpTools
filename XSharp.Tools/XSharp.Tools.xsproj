@@ -78,7 +78,8 @@
     <Compile Include="ArrayExtensions.prg" />
     <Compile Include="BindableBase.prg" />
     <Compile Include="ExpandoBase.prg" />
-    <Compile Include="Functions.prg" />
+    <Compile Include="StringExtensions.prg" />
+    <Compile Include="ToolsFunctions.prg" />
     <Compile Include="ObjectExtensions.prg" />
     <Compile Include="..\Common\commonAssemblyInfo.prg">
       <Link>commonAssemblyInfo.prg</Link>

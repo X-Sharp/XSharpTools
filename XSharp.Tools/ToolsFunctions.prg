@@ -10,7 +10,7 @@ BEGIN NAMESPACE XSharp.Tools
 /// <summary> 
 /// container class for static methods i.e. functions
 /// </summary>
-STATIC CLASS Functions
+STATIC CLASS ToolsFunctions
 
 STATIC CONSTRUCTOR()
 
@@ -31,9 +31,9 @@ STATIC METHOD AssemblyClasses( oAssembly AS Assembly ) AS STRING[]
 	FOREACH oType AS Type IN aTypes
 		oClassNames:Add( oType:FullName )
 	NEXT
-	aTypes				:= null
+	aTypes				:= NULL
 	aReturn				:= oClassNames:ToArray()
-	oClassNames			:= null
+	oClassNames			:= NULL
 	
 	RETURN aReturn
 	
@@ -58,11 +58,11 @@ STATIC METHOD AssemblyClasses( oAssembly AS Assembly, cInterfaceName AS STRING )
 				oClassNames:Add( oType:FullName )
 			ENDIF
 		NEXT
-		aInterfaces			:= null
+		aInterfaces			:= NULL
 	NEXT
-	aTypes				:= null
+	aTypes				:= NULL
 	aReturn				:= oClassNames:ToArray()
-	oClassNames			:= null
+	oClassNames			:= NULL
 	
 	RETURN aReturn
 	
@@ -75,7 +75,7 @@ STATIC METHOD AssemblyClasses( oAssembly AS Assembly, cInterfaceName AS STRING )
 STATIC METHOD CombinePath( cPath1 AS STRING, cPath2 AS STRING ) AS STRING
 	LOCAL cReturn			AS STRING
 	
-	IF cPath2:Length > 1 .and. ( cPath2[0] == Path.DirectorySeparatorChar .or. cPath2[0] == Path.AltDirectorySeparatorChar )
+	IF cPath2:Length > 1 .AND. ( cPath2[0] == Path.DirectorySeparatorChar .OR. cPath2[0] == Path.AltDirectorySeparatorChar )
 		cPath2				:= cPath2:Substring( 1 )
 	ENDIF
 	cReturn				:= Path.Combine( cPath1, cPath2 )
@@ -173,9 +173,9 @@ STATIC METHOD IsRunningElevated() AS LOGIC
 	LOCAL lReturn			AS LOGIC
 	
 	IF WindowsPrincipal{ WindowsIdentity.GetCurrent() }:IsInRole( WindowsBuiltInRole.Administrator )
-		lReturn			:= true
+		lReturn			:= TRUE
 	ELSE
-		lReturn			:= false
+		lReturn			:= FALSE
 	ENDIF
 	
 	RETURN lReturn	   
@@ -227,9 +227,9 @@ STATIC METHOD StartedFromNetwork() AS LOGIC
 
 	oDriveInfo			:= System.IO.DriveInfo{ ProgramPath() }
 	IF oDriveInfo:DriveType == System.IO.DriveType.Network
-		lReturn				:= true
+		lReturn				:= TRUE
 	ELSE
-		lReturn				:= false
+		lReturn				:= FALSE
 	ENDIF
 	
 	RETURN lReturn
@@ -244,9 +244,9 @@ STATIC METHOD StartedFromRemovableMedia() AS LOGIC
 
 	oDriveInfo			:= System.IO.DriveInfo{ ProgramPath() }
 	IF oDriveInfo:DriveType == System.IO.DriveType.Removable
-		lReturn				:= true
+		lReturn				:= TRUE
 	ELSE
-		lReturn				:= false
+		lReturn				:= FALSE
 	ENDIF
 	
 	RETURN lReturn 
